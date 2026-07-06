@@ -1,0 +1,142 @@
+{% extends 'catalogue/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-content">
+        <span class="badge">100% Natural & Zero Side Effects</span>
+        <h1>Make Your Life More <br><span class="highlight">Healthy & Beautiful</span></h1>
+        <p>Expert guidance and natural products for disease management, weight management, and overall wellness.</p>
+        <div class="hero-buttons">
+            <a href="#products" class="btn-primary btn-large">Explore Products <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://wa.me/919007104448" target="_blank" class="btn-secondary btn-large"><i class="fa-brands fa-whatsapp"></i> Chat with Expert</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <div class="about-container glass-panel">
+        <div class="about-text">
+            <h2>Meet <span class="highlight">Nutritionist Debasmita</span></h2>
+            <p class="subtitle">Disease & Weight Management Specialist</p>
+            <p>Welcome to Fit & Fine Forever. Debasmita brings over 12 years of experience as a nutrition consultant and lifestyle coach. Her personalized diet plans and meticulously crafted natural products have zero side effects and are designed for optimal wellness.</p>
+            <p>Debasmita works with clients balancing careers, families, and health goals, and believes in harnessing the power of nature to restore health and vitality.</p>
+            <ul class="features-list">
+                <li><i class="fa-solid fa-check-circle"></i> Daily Follow-up</li>
+            </ul>
+        </div>
+        <div class="about-image">
+            <div class="image-wrapper">
+                <img src="{% static 'img/doc_images/image10.jpeg' %}" alt="Debasmita Chandra">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Consultation Section -->
+<section id="consultation" class="consultation-section">
+    <div class="section-header">
+        <h2>Consultation</h2>
+        <p>Book one-on-one consultations and personalized diet plans tailored to your needs.</p>
+    </div>
+
+    <div class="consultation-grid">
+        <div class="consultation-content glass-panel">
+            <h3>Personalized care for long-term wellness</h3>
+            <p class="lead">Debasmita’s diet plan heals your gut, detoxifies your cells, and restores your body's natural balance. Her easy-to-follow plans focus on home-cooked meals and practical eating habits you can sustain.</p>
+            <p class="small">Sessions include assessment, tailored meal plan, and daily follow-ups to keep you on track.</p>
+
+            <div class="consultation-actions">
+                <a href="https://wa.me/919007104448" target="_blank" class="btn-book btn-large"><i class="fa-brands fa-whatsapp"></i> Book Now</a>
+            </div>
+        </div>
+
+        <div class="consultation-card glass-panel">
+            <h4>We help manage</h4>
+            <div class="condition-list">
+                <span class="condition-item">Obesity</span>
+                <span class="condition-item">Weight Gain</span>
+                <span class="condition-item">Pregnancy</span>
+                <span class="condition-item">Diabetes</span>
+                <span class="condition-item">Hypertension</span>
+                <span class="condition-item">Thyroid</span>
+                <span class="condition-item">PCOD / PCOS</span>
+                <span class="condition-item">Inflammation</span>
+                <span class="condition-item">Skin & Hair</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section id="products" class="products-section">
+    <div class="section-header">
+        <h2>Our <span class="highlight">Collection</span></h2>
+        <p>Discover our range of natural teas, protein mixes, and personalized plans.</p>
+    </div>
+
+    {% for category in categories %}
+    <div class="category-block">
+        <h3 class="category-title">{{ category.name }}</h3>
+        {% if category.description %}
+        <p class="category-desc">{{ category.description }}</p>
+        {% endif %}
+
+        <div class="product-grid">
+            {% for product in category.products.all %}
+            <div class="product-card glass-panel">
+                <div class="product-image">
+                    {% if product.image_url %}
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="placeholder-img"><i class="fa-solid fa-leaf"></i></div>
+                    {% endif %}
+                    {% if product.offer_price and product.price %}
+                    <div class="sale-badge">SALE</div>
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h4>{{ product.name }}</h4>
+                    {% if product.weight %}
+                    <span class="weight-badge">{{ product.weight }}</span>
+                    {% endif %}
+                    
+                    <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+                    
+                    <div class="benefits">
+                        {% for benefit in product.get_benefits_list|slice:":3" %}
+                        <span class="benefit-tag">{{ benefit }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="price-action">
+                        <div class="price">
+                            {% if product.offer_price %}
+                            <span class="current-price">₹{{ product.offer_price }}</span>
+                            {% if product.price %}
+                            <span class="original-price">₹{{ product.price }}</span>
+                            {% endif %}
+                            {% else %}
+                            <span class="current-price">Contact Us</span>
+                            {% endif %}
+                        </div>
+                        <a href="https://wa.me/919007104448?text=Hi%20Debasmita,%20I'm%20interested%20in%20booking%20{{ product.name|urlencode }}" target="_blank" class="btn-book"><i class="fa-brands fa-whatsapp"></i> Book Now</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No products available in this category yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock content %}

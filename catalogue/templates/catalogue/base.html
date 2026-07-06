@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fit & Fine Forever | Nutritionist Debasmita</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'index' %}" class="logo">
+                <img src="{% static 'img/doc_images/image1.png' %}" alt="Fit & Fine Forever logo" class="site-logo" />
+                <span class="site-title">Fit & Fine Forever</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#consultation">Consultation</a>
+                <a href="#products">Products</a>
+                <a href="#contact" class="btn-primary">Contact Us</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Fit & Fine Forever</h3>
+                <p>Get your best health ever with personalized diet plans and natural products.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-phone"></i> +91 9007104448</p>
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp Available</p>
+                <p><i class="fa-solid fa-user-doctor"></i> Nutritionist Debasmita</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Fit & Fine Forever. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
