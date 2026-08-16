@@ -4,64 +4,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fit & Fine Forever | Nutritionist Debasmita</title>
+    <title>Fit & Fine Forever | Nutritionist Debasmita Chandra</title>
+    <meta name="description" content="Personalized diet plans and 100% natural herbal wellness products by Nutritionist Debasmita Chandra. Zero side effects.">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=20260809">
 </head>
 <body>
-    <!-- Navbar -->
+
+    <!-- WebGL Background Canvas (Three.js Ambient Particles & Shimmer) -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Subtle Film Grain Overlay (Ricardo Chance / Studio Freight style) -->
+    <div class="grain-overlay"></div>
+
+    <!-- NAVBAR — Floating Pill with Live Time Code & Status -->
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="{% url 'index' %}" class="logo">
-                <img src="{% static 'img/doc_images/image1.png' %}" alt="Fit & Fine Forever logo" class="site-logo" />
-                <span class="site-title">Fit & Fine Forever</span>
+        <div class="nav-inner">
+            <a href="{% url 'index' %}" class="logo-link">
+                <img src="{% static 'img/brand_logo.png' %}" alt="Fit & Fine Forever Logo" class="logo-img" style="height: 42px; border-radius: 50%; border: 1px solid rgba(198,156,109,0.4);">
+                <span class="logo-text">Fit & Fine Forever</span>
             </a>
-            <div class="nav-links">
+
+            <div class="nav-status-badge">
+                <span class="pulse-dot"></span>
+                <span class="status-text">AVAILABLE</span>
+                <span class="nav-time" id="live-clock">23:14 IST</span>
+            </div>
+
+            <div class="nav-menu">
                 <a href="#about">About</a>
                 <a href="#consultation">Consultation</a>
                 <a href="#products">Products</a>
-                <a href="#contact" class="btn-primary">Contact Us</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+                <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I'd%20like%20to%20book%20a%20diet%20consultation!" target="_blank" class="btn-nav-cta">
+                    <i class="fa-brands fa-whatsapp"></i> Book Now
+                </a>
             </div>
-            <div class="mobile-menu-btn">
+
+            <button class="mobile-toggle" aria-label="Menu">
                 <i class="fa-solid fa-bars"></i>
-            </div>
+            </button>
+        </div>
+
+        <div class="mobile-drawer">
+            <a href="#about">About</a>
+            <a href="#consultation">Consultation</a>
+            <a href="#products">Products</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+            <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}" target="_blank" class="btn-nav-cta"><i class="fa-brands fa-whatsapp"></i> Book Now</a>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
-        {% block content %}
-        {% endblock content %}
+        {% block content %}{% endblock content %}
     </main>
 
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I%20have%20a%20query!" target="_blank" class="wa-float" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox-modal">
+        <div class="lightbox-inner">
+            <button class="lightbox-x" id="lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+            <img src="" alt="Client Result" id="lightbox-img">
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-container">
+    <footer class="site-footer" id="contact">
+        <div class="footer-inner">
             <div class="footer-col">
                 <h3>Fit & Fine Forever</h3>
-                <p>Get your best health ever with personalized diet plans and natural products.</p>
+                <p>Personalized diet plans and natural products by Nutritionist Debasmita Chandra with 12+ years of experience.</p>
+                <p style="margin-top: 12px;"><i class="fa-solid fa-shield-heart" style="color: #C69C6D; margin-right: 8px;"></i>100% Natural • Zero Side Effects</p>
             </div>
             <div class="footer-col">
-                <h3>Contact</h3>
-                <p><i class="fa-solid fa-phone"></i> +91 9007104448</p>
-                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp Available</p>
-                <p><i class="fa-solid fa-user-doctor"></i> Nutritionist Debasmita</p>
+                <h3>Quick Links</h3>
+                <p><a href="#about">About Debasmita ↗</a></p>
+                <p><a href="#consultation">Diet Consultation (₹{{ consultation_price|floatformat:0 }}) ↗</a></p>
+                <p><a href="#products">Wellness Products ↗</a></p>
+                <p><a href="#testimonials">Client Results ↗</a></p>
+                <p style="margin-top: 10px;"><a href="{% url 'admin_dashboard' %}" target="_blank" style="color: var(--gold); font-weight: 700;"><i class="fa-solid fa-lock" style="margin-right: 6px;"></i>Admin Portal 🔒</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Get In Touch</h3>
+                <p><i class="fa-solid fa-phone" style="color: #C69C6D; margin-right: 8px;"></i>{% firstof whatsapp_display '+91 9007104448' %}</p>
+                <p><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 8px;"></i>WhatsApp Available</p>
+                <div style="margin-top: 22px;">
+                    <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}" target="_blank" class="btn-dark-pill">
+                        Schedule Now <span>↗</span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bar">
             <p>&copy; 2026 Fit & Fine Forever. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Custom Fluid Magnetic Cursor (Active Theory / Ricardo Chance Style) -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"><span class="cursor-label"></span></div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

@@ -15,14 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('catalogue.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve uploaded media files (product/testimonial/founder/hero images).
+# In development Django's runserver serves them via static(); in production
+# they are served directly from MEDIA_ROOT, which lives on the persistent
+# /data volume.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if not settings.DEBUG:
+    urlpatterns += [re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})]

@@ -16,17 +16,28 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Persistent data directory.
+# On Railway, create a Volume mounted at /data and set DATA_DIR=/data in the
+# Variables tab — this keeps db.sqlite3 and uploaded media safe across redeploys.
+# Locally it falls back to the project root, so nothing changes in development.
+DATA_DIR = Path(os.environ.get('DATA_DIR', str(BASE_DIR)))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wf3!&9cx)9k$mr01)p$j7^3p*nf08t+y05(+v_s3_7x!6nug+%'
+# On Railway set SECRET_KEY in the Variables tab. The fallback is for local dev only.
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-wf3!&9cx)9k$mr01)p$j7^3p*nf08t+y05(+v_s3_7x!6nug+%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# On Railway set DEBUG=false in the Variables tab.
+DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = []
+# Comma-separated host list. Set on Railway to your domain, e.g. myapp.up.railway.app
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '*').split(',') if h.strip()]
+
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://*.ngrok-free.dev,https://*.ngrok.io,https://*.ngrok-free.app,https://*.ngrok.app').split(',') if o.strip()]
 
 
 # Application definition
@@ -37,12 +48,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'import_export',
     'catalogue',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -78,7 +92,7 @@ WSGI_APPLICATION = 'fit_and_fine.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DATA_DIR / 'db.sqlite3',
     }
 }
 
@@ -119,11 +133,38 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Serve compressed static files in production (WhiteNoise)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# ---------------------------------------------------------------------------
+# Production security hardening (only applied when DEBUG is off)
+# ---------------------------------------------------------------------------
+if not DEBUG:
+    # Railway terminates HTTPS and sets X-Forwarded-Proto automatically
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = 'same-origin'
+
+# Logging: warnings+ to console so Railway captures them in logs
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {'console': {'class': 'logging.StreamHandler'}},
+    'root': {'handlers': ['console'], 'level': 'INFO'},
+}

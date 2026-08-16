@@ -2,141 +2,341 @@
 {% load static %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-bg-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
-    <div class="hero-content">
-        <span class="badge">100% Natural & Zero Side Effects</span>
-        <h1>Make Your Life More <br><span class="highlight">Healthy & Beautiful</span></h1>
-        <p>Expert guidance and natural products for disease management, weight management, and overall wellness.</p>
-        <div class="hero-buttons">
-            <a href="#products" class="btn-primary btn-large">Explore Products <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="https://wa.me/919007104448" target="_blank" class="btn-secondary btn-large"><i class="fa-brands fa-whatsapp"></i> Chat with Expert</a>
+<!-- ============================================
+     HERO — Full-screen cinematic dark with
+     Otsuka AIR / Ricardo Chance design language
+     ============================================ -->
+<section class="hero-section">
+    <div class="watermark-text watermark-hero">AIR // 01</div>
+    <div class="hero-grid">
+        <!-- Left Content -->
+        <div class="hero-left">
+            <p class="hero-eyebrow reveal"><span class="idx-tag">00 //</span> Nutritionist Debasmita • Est. 2014</p>
+
+            <h1 class="hero-title reveal" style="transition-delay: 100ms;">
+                Nourish Body.<br><em>Elevate Life.</em>
+            </h1>
+
+            <p class="hero-desc reveal" style="transition-delay: 200ms;">
+                Daily meal plans and 100% natural herbal formulations to help you restore health, heal your gut, and thrive. Smart meal planning for a healthier, balanced lifestyle.
+            </p>
+
+            <div class="hero-btns reveal" style="transition-delay: 300ms;">
+                <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I'd%20like%20to%20schedule%20a%20diet%20consultation!" target="_blank" class="btn-hero btn-hero-fill">
+                    Schedule Now <span>↗</span>
+                </a>
+                <a href="#products" class="btn-hero">
+                    Explore Collection <span>↗</span>
+                </a>
+            </div>
+
+            <p class="hero-scroll-hint reveal" style="transition-delay: 400ms;">
+                Scroll For More
+            </p>
+        </div>
+
+        <!-- Right — Hero Image -->
+        <div class="hero-img-card reveal-right" style="transition-delay: 200ms;">
+            <img src="{% if site_setting %}{{ site_setting.get_hero_image }}{% else %}{% static 'img/doc_images/image2.png' %}{% endif %}" alt="Fit & Fine Forever Natural Products">
+            
+            <div class="hero-3d-badge badge-top-left">
+                <i class="fa-solid fa-leaf"></i> 100% Herbal
+            </div>
+            <div class="hero-3d-badge badge-bottom-right">
+                <i class="fa-solid fa-shield-heart"></i> Zero Side Effects
+            </div>
+
+            <div class="hero-img-overlay">
+                <h4>100% Natural Formulations</h4>
+                <p>Zero side effects • Home-cooked food diets</p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- About Section -->
+<!-- ============================================
+     ABOUT — Editorial split with scroll-reveal
+     ============================================ -->
 <section id="about" class="about-section">
-    <div class="about-container glass-panel">
-        <div class="about-text">
-            <h2>Meet <span class="highlight">Nutritionist Debasmita</span></h2>
-            <p class="subtitle">Disease & Weight Management Specialist</p>
-            <p>Welcome to Fit & Fine Forever. Debasmita brings over 12 years of experience as a nutrition consultant and lifestyle coach. Her personalized diet plans and meticulously crafted natural products have zero side effects and are designed for optimal wellness.</p>
-            <p>Debasmita works with clients balancing careers, families, and health goals, and believes in harnessing the power of nature to restore health and vitality.</p>
-            <ul class="features-list">
-                <li><i class="fa-solid fa-check-circle"></i> Daily Follow-up</li>
-            </ul>
-        </div>
-        <div class="about-image">
-            <div class="image-wrapper">
-                <img src="{% static 'img/doc_images/image10.jpeg' %}" alt="Debasmita Chandra">
+    <div class="watermark-text watermark-about">ABOUT</div>
+    <div class="section-idx-header reveal">
+        <span class="idx-num">01 //</span> <span class="idx-title">FOUNDER & VISION</span>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-heading reveal-left">
+            <h2>{% if site_setting %}{{ site_setting.about_title|safe }}{% else %}About<br>Fit & Fine<br>Forever{% endif %}</h2>
+            
+            {% if site_setting and site_setting.founder_image %}
+            <div style="margin-top: 30px; text-align: center;">
+                <img src="{{ site_setting.get_founder_image }}" alt="{{ site_setting.founder_name }}" style="width: 100%; max-width: 280px; height: auto; aspect-ratio: 1/1; border-radius: 50%; object-fit: cover; box-shadow: 0 24px 48px rgba(0,0,0,0.1); border: 8px solid #fff; margin: 0 auto;">
+                <h4 class="founder-name" style="margin-top: 24px; font-size: clamp(1.1rem, 3.5vw, 1.4rem); font-family: var(--font-serif); color: var(--text-on-dark);">{{ site_setting.founder_name }}</h4>
+                <p class="founder-role" style="font-size: clamp(0.72rem, 2vw, 0.85rem); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 4px;">Founder & Nutritionist</p>
             </div>
+            {% endif %}
+        </div>
+
+        <div class="about-body reveal-right">
+            {% if site_setting and site_setting.about_text %}
+                {{ site_setting.about_text|safe }}
+            {% else %}
+                <p>At Fit & Fine Forever, we believe that healthy eating should be simple, enjoyable, and accessible to everyone. Our mission is to help you nourish your body and mind by providing personalized meal plans, delicious recipes, and practical tools that fit your lifestyle.</p>
+                <p>Debasmita brings over 12 years of experience as a nutrition consultant and lifestyle coach. Whether you're a busy professional, a health enthusiast, or just starting your wellness journey — Fit & Fine Forever makes it easy to plan, prepare, and enjoy nutritious meals that fuel your day.</p>
+            {% endif %}
+
+            <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I'd%20like%20to%20know%20more%20about%20you" target="_blank" class="about-link" style="margin-top: 14px;">
+                Chat on WhatsApp <span>↗</span>
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Consultation Section -->
+<!-- ============================================
+     METRICS STRIP — Scroll-revealed counters
+     ============================================ -->
+<section class="metrics-strip">
+    <div class="metrics-inner stagger-children">
+        <div class="metric reveal">
+            <h4>12+ Yrs</h4>
+            <p>Expert Experience</p>
+        </div>
+        <div class="metric reveal">
+            <h4>100%</h4>
+            <p>Natural Herbs</p>
+        </div>
+        <div class="metric reveal">
+            <h4>0</h4>
+            <p>Side Effects</p>
+        </div>
+        <div class="metric reveal">
+            <h4>1000+</h4>
+            <p>Happy Clients</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     CONSULTATION — With scroll-reveal
+     ============================================ -->
 <section id="consultation" class="consultation-section">
-    <div class="section-header">
-        <h2>Consultation</h2>
-        <p>Book one-on-one consultations and personalized diet plans tailored to your needs.</p>
+    <div class="section-idx-header reveal">
+        <span class="idx-num">02 //</span> <span class="idx-title">PERSONALIZED CONSULTATION</span>
     </div>
+    <h2 class="section-title reveal" style="transition-delay: 80ms;">Custom Diet Plans</h2>
+    <p class="section-subtitle reveal" style="transition-delay: 160ms;">Heal your gut, detoxify your cells, and restore your body's natural balance through easy home-cooked diet plans.</p>
 
-    <div class="consultation-grid">
-        <div class="consultation-content glass-panel">
-            <h3>Personalized care for long-term wellness</h3>
-            <p class="lead">Debasmita’s diet plan heals your gut, detoxifies your cells, and restores your body's natural balance. Her easy-to-follow plans focus on home-cooked meals and practical eating habits you can sustain.</p>
-            <p class="small">Sessions include assessment, tailored meal plan, and daily follow-ups to keep you on track.</p>
+    <div class="consult-card reveal-scale" style="transition-delay: 200ms;">
+        <div class="consult-left">
+            <h3>Vital Diet Plan</h3>
+            <p>Debasmita's diet plan heals your gut, detoxifies your cells, and restores your body's natural balance. Her easy-to-follow diet plans revolve around easy eating habits through only home-cooked foods.</p>
 
-            <div class="consultation-actions">
-                <a href="https://wa.me/919007104448" target="_blank" class="btn-book btn-large"><i class="fa-brands fa-whatsapp"></i> Book Now</a>
+            <div class="price-display">
+                <span class="price-now">₹{{ consultation_price|floatformat:0 }}</span>
+                <span class="price-was">₹{{ consultation_mrp|floatformat:0 }}</span>
             </div>
+
+            <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I%20want%20to%20book%20the%20Personalized%20Diet%20Consultation%20(Rs.%20{{ consultation_price|floatformat:0 }})" target="_blank" class="btn-dark-pill">
+                <i class="fa-brands fa-whatsapp"></i> Book Now <span>↗</span>
+            </a>
         </div>
 
-        <div class="consultation-card glass-panel">
-            <h4>We help manage</h4>
-            <div class="condition-list">
-                <span class="condition-item">Obesity</span>
-                <span class="condition-item">Weight Gain</span>
-                <span class="condition-item">Pregnancy</span>
-                <span class="condition-item">Diabetes</span>
-                <span class="condition-item">Hypertension</span>
-                <span class="condition-item">Thyroid</span>
-                <span class="condition-item">PCOD / PCOS</span>
-                <span class="condition-item">Inflammation</span>
-                <span class="condition-item">Skin & Hair</span>
+        <div class="consult-right">
+            <h4>Get the perfect diet plan to manage:</h4>
+            <div class="conditions-grid stagger-children">
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Obesity</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Weight Gain</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Pregnancy</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Diabetes</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Hypertension</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Thyroid</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> PCOD / PCOS</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Inflammation</div>
+                <div class="cond-pill reveal"><i class="fa-solid fa-check"></i> Skin & Hair</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Products Section -->
-<section id="products" class="products-section">
-    <div class="section-header">
-        <h2>Our <span class="highlight">Collection</span></h2>
-        <p>Discover our range of natural teas, protein mixes, and personalized plans.</p>
+<!-- ============================================
+     TRANSFORMATIONS — Immersive dark marquee
+     with infinite auto-scroll ticker
+     ============================================ -->
+<section id="testimonials" class="transformations-section">
+    <div class="watermark-text watermark-testimonials">RESULTS</div>
+    <div class="transform-header reveal">
+        <div class="section-idx-header" style="justify-content: center; margin-bottom: 14px;">
+            <span class="idx-num" style="color: var(--gold);">03 //</span> <span class="idx-title" style="color: rgba(245,241,235,0.7);">CLIENT TRANSFORMATIONS</span>
+        </div>
+        <h2 class="transform-title">Real<br><em>Transformations</em></h2>
+        <p class="transform-subtitle">1000+ verified client results. Click any card to view the full proof screenshot.</p>
     </div>
 
+    <!-- Infinite Marquee Row 1 — scrolls left -->
+    <div class="marquee-wrapper">
+        <div class="marquee-track marquee-left">
+            {% for test in testimonials %}
+            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
+                <div class="marquee-card-img">
+                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <div class="marquee-card-overlay">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+                <div class="marquee-card-info">
+                    <div class="marquee-stars">
+                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
+                    </div>
+                    <h4>{{ test.client_name }}</h4>
+                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <!-- Duplicate set for seamless loop -->
+            {% for test in testimonials %}
+            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
+                <div class="marquee-card-img">
+                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <div class="marquee-card-overlay">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+                <div class="marquee-card-info">
+                    <div class="marquee-stars">
+                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
+                    </div>
+                    <h4>{{ test.client_name }}</h4>
+                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Infinite Marquee Row 2 — scrolls right (reverse) -->
+    <div class="marquee-wrapper" style="margin-top: 24px;">
+        <div class="marquee-track marquee-right">
+            {% for test in testimonials reversed %}
+            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
+                <div class="marquee-card-img">
+                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <div class="marquee-card-overlay">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+                <div class="marquee-card-info">
+                    <div class="marquee-stars">
+                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
+                    </div>
+                    <h4>{{ test.client_name }}</h4>
+                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% for test in testimonials reversed %}
+            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
+                <div class="marquee-card-img">
+                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <div class="marquee-card-overlay">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+                <div class="marquee-card-info">
+                    <div class="marquee-stars">
+                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
+                    </div>
+                    <h4>{{ test.client_name }}</h4>
+                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="transform-cta reveal" style="text-align: center; margin-top: 50px;">
+        <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I%20saw%20your%20client%20results%20and%20I%20want%20to%20start%20my%20transformation!" target="_blank" class="btn-hero btn-hero-fill" style="border-color: var(--gold); background: var(--gold); color: var(--dark);">
+            Start Your Transformation <span>↗</span>
+        </a>
+    </div>
+</section>
+
+<!-- ============================================
+     PRODUCTS — Grid with staggered card reveals
+     ============================================ -->
+<section id="products" class="products-section">
+    <div class="watermark-text watermark-products">WELLNESS</div>
+    <div class="section-idx-header reveal">
+        <span class="idx-num">04 //</span> <span class="idx-title">HERBAL COLLECTION</span>
+    </div>
+    <h2 class="section-title reveal" style="transition-delay: 80ms;">Wellness Formulations</h2>
+    <p class="section-subtitle reveal" style="transition-delay: 160ms; color: var(--gold); font-weight: 700; font-size: 1.25rem;">Book Any Product And Get Flat 12% Off</p>
+
+    <!-- Controls -->
+    <div class="products-controls reveal" style="transition-delay: 200ms;">
+        <div class="search-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="product-search-input" placeholder="Search by name or benefit...">
+        </div>
+
+        <div class="filter-pills">
+            <button class="fpill active" data-filter="all">All</button>
+            {% for category in categories %}
+            <button class="fpill" data-filter="{{ category.slug }}">{{ category.name }}</button>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Product Grid by Category -->
     {% for category in categories %}
-    <div class="category-block">
-        <h3 class="category-title">{{ category.name }}</h3>
+    <div class="cat-block" data-category="{{ category.slug }}">
+        <h3 class="cat-block-title reveal">{{ category.name }}</h3>
         {% if category.description %}
-        <p class="category-desc">{{ category.description }}</p>
+        <p class="cat-block-desc reveal" style="transition-delay: 80ms;">{{ category.description }}</p>
         {% endif %}
 
-        <div class="product-grid">
+        <div class="p-grid stagger-children">
             {% for product in category.products.all %}
-            <div class="product-card glass-panel">
-                <div class="product-image">
-                    {% if product.image_url %}
-                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
-                    {% else %}
-                    <div class="placeholder-img"><i class="fa-solid fa-leaf"></i></div>
-                    {% endif %}
-                    {% if product.offer_price and product.price %}
-                    <div class="sale-badge">SALE</div>
-                    {% endif %}
+            <div class="p-card reveal-scale">
+                <div class="p-card-img">
+                    <img src="{{ product.get_image }}" alt="{{ product.name }}" loading="lazy">
                 </div>
-                <div class="product-info">
-                    <h4>{{ product.name }}</h4>
-                    {% if product.weight %}
-                    <span class="weight-badge">{{ product.weight }}</span>
-                    {% endif %}
-                    
-                    <p class="product-description">{{ product.description|truncatewords:15 }}</p>
-                    
-                    <div class="benefits">
-                        {% for benefit in product.get_benefits_list|slice:":3" %}
-                        <span class="benefit-tag">{{ benefit }}</span>
-                        {% endfor %}
+                <div class="p-card-body">
+                    <div class="p-card-header">
+                        <h4>{{ product.name }}</h4>
+                        <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I'm%20interested%20in%20{{ product.name|urlencode }}" target="_blank" class="arrow-link" title="Enquire on WhatsApp">↗</a>
                     </div>
 
-                    <div class="price-action">
-                        <div class="price">
-                            {% if product.offer_price %}
-                            <span class="current-price">₹{{ product.offer_price }}</span>
-                            {% if product.price %}
-                            <span class="original-price">₹{{ product.price }}</span>
-                            {% endif %}
-                            {% else %}
-                            <span class="current-price">Contact Us</span>
-                            {% endif %}
-                        </div>
-                        <a href="https://wa.me/919007104448?text=Hi%20Debasmita,%20I'm%20interested%20in%20booking%20{{ product.name|urlencode }}" target="_blank" class="btn-book"><i class="fa-brands fa-whatsapp"></i> Book Now</a>
+                    {% if product.subtitle_tag %}
+                    <p class="p-card-tag">{{ product.subtitle_tag }}</p>
+                    {% endif %}
+
+                    {% if product.weight %}
+                    <span class="p-card-weight">{{ product.weight }}</span>
+                    {% endif %}
+
+                    <p class="p-card-desc">{{ product.description|truncatewords:20 }}</p>
+
+                    {% if product.get_benefits_list %}
+                    <div class="p-card-chips">
+                        {% for b in product.get_benefits_list|slice:":4" %}
+                        <span class="p-chip">{{ b }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="p-card-footer">
+                        <span class="p-price">
+                            {% if product.offer_price %}₹{{ product.offer_price|floatformat:0 }}{% else %}₹{{ product.price|floatformat:0 }}{% endif %}
+                        </span>
+                        <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I%20want%20to%20book%20{{ product.name|urlencode }}" target="_blank" rel="noopener noreferrer" class="btn-book-sm">
+                            Book Now <span>↗</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <p>No products available in this category yet.</p>
             {% endfor %}
         </div>
     </div>
     {% endfor %}
 </section>
-
 {% endblock content %}
+
