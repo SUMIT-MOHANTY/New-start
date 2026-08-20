@@ -45,6 +45,13 @@ website_docx.txt
 # ===== Existing project-specific ignores =====
 static/img/doc_images
 
+# ===== Seed / temp data (not part of app) =====
+docx_temp/
+copy_and_seed_data.py
+seed_site.py
+seed_db.py
+assign_images.py
+
 # ===== OS / Editor =====
 .DS_Store
 .idea/
