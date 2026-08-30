@@ -47,6 +47,38 @@ class Product(models.Model):
             return self.image_url
         return '/static/img/placeholder.png'
 
+    def get_weight_variants(self):
+        """
+        Parses weight_options string (e.g., '70g (₹349) | 100g (₹499) | 150g (₹749)')
+        into a list of structured dictionaries: [{'weight': '70g', 'price': 349, 'is_default': True}, ...]
+        """
+        import re
+        default_p = int(self.offer_price or self.price or 0)
+        
+        if not self.weight_options:
+            return [{'weight': self.weight or 'Standard', 'price': default_p, 'is_default': True}]
+        
+        variants = []
+        parts = [p.strip() for p in self.weight_options.split('|') if p.strip()]
+        for idx, part in enumerate(parts):
+            # Match formats like: "70g (₹349)", "20 Tea Bags (₹299 - MRP ₹399)", "250g (₹199 - MRP ₹220)"
+            match = re.match(r'^(.*?)\s*\((?:₹|Rs\.?\s*)?(\d+)(?:.*)?\)$', part)
+            if match:
+                w_label = match.group(1).strip()
+                w_price = int(match.group(2).strip())
+                variants.append({
+                    'weight': w_label,
+                    'price': w_price,
+                    'is_default': (idx == 0)
+                })
+            else:
+                variants.append({
+                    'weight': part,
+                    'price': default_p,
+                    'is_default': (idx == 0)
+                })
+        return variants
+
 
 class Testimonial(models.Model):
     client_name = models.CharField(max_length=100, default="Happy Client")
