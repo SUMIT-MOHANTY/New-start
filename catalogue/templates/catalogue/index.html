@@ -70,7 +70,7 @@
             {% if site_setting and site_setting.founder_image %}
             <div style="margin-top: 30px; text-align: center;">
                 <img src="{{ site_setting.get_founder_image }}" alt="{{ site_setting.founder_name }}" style="width: 100%; max-width: 280px; height: auto; aspect-ratio: 1/1; border-radius: 50%; object-fit: cover; box-shadow: 0 24px 48px rgba(0,0,0,0.1); border: 8px solid #fff; margin: 0 auto;">
-                <h4 class="founder-name" style="margin-top: 24px; font-size: clamp(1.1rem, 3.5vw, 1.4rem); font-family: var(--font-serif); color: var(--text-on-dark);">{{ site_setting.founder_name }}</h4>
+                <h4 class="founder-name" style="margin-top: 24px; font-size: clamp(1.1rem, 3.5vw, 1.4rem); font-family: var(--font-serif); color: var(--text-dark);">{{ site_setting.founder_name }}</h4>
                 <p class="founder-role" style="font-size: clamp(0.72rem, 2vw, 0.85rem); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 4px;">Founder & Nutritionist</p>
             </div>
             {% endif %}
@@ -268,7 +268,7 @@
         <span class="idx-num">04 //</span> <span class="idx-title">HERBAL COLLECTION</span>
     </div>
     <h2 class="section-title reveal" style="transition-delay: 80ms;">Wellness Formulations</h2>
-    <p class="section-subtitle reveal" style="transition-delay: 160ms; color: var(--gold); font-weight: 700; font-size: 1.25rem;">Book Any Product And Get Flat 12% Off</p>
+    <p class="section-subtitle reveal" style="transition-delay: 160ms; color: var(--olive); font-weight: 700; font-size: 1.25rem;">Book Any Product And Get Flat 12% Off</p>
 
     <!-- Controls -->
     <div class="products-controls reveal" style="transition-delay: 200ms;">
@@ -309,11 +309,24 @@
                     <p class="p-card-tag">{{ product.subtitle_tag }}</p>
                     {% endif %}
 
-                    {% if product.weight %}
-                    <span class="p-card-weight">{{ product.weight }}</span>
-                    {% endif %}
+                    <!-- Interactive Weight & Size Selector -->
+                    <div class="p-weight-selector">
+                        <span class="weight-selector-label"><i class="fa-solid fa-scale-balanced"></i> Select Weight / Packaging:</span>
+                        <div class="weight-pills-wrap">
+                            {% for variant in product.get_weight_variants %}
+                            <button type="button" 
+                                    class="weight-pill {% if variant.is_default %}active{% endif %}" 
+                                    data-weight="{{ variant.weight }}" 
+                                    data-price="{{ variant.price }}"
+                                    data-product="{{ product.name }}">
+                                <span class="pill-weight">{{ variant.weight }}</span>
+                                <span class="pill-price">₹{{ variant.price }}</span>
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </div>
 
-                    <p class="p-card-desc">{{ product.description|truncatewords:20 }}</p>
+                    <p class="p-card-desc">{{ product.description|truncatewords:18 }}</p>
 
                     {% if product.get_benefits_list %}
                     <div class="p-card-chips">
@@ -324,10 +337,17 @@
                     {% endif %}
 
                     <div class="p-card-footer">
-                        <span class="p-price">
-                            {% if product.offer_price %}₹{{ product.offer_price|floatformat:0 }}{% else %}₹{{ product.price|floatformat:0 }}{% endif %}
-                        </span>
-                        <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I%20want%20to%20book%20{{ product.name|urlencode }}" target="_blank" rel="noopener noreferrer" class="btn-book-sm">
+                        <div class="p-price-group">
+                            <span class="p-price js-display-price">
+                                {% with first_v=product.get_weight_variants|first %}
+                                ₹{{ first_v.price }}
+                                {% endwith %}
+                            </span>
+                            {% if product.price and product.price > product.offer_price %}
+                            <span class="p-mrp">₹{{ product.price|floatformat:0 }}</span>
+                            {% endif %}
+                        </div>
+                        <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I%20want%20to%20book%20{{ product.name|urlencode }}%20({% with first_v=product.get_weight_variants|first %}{{ first_v.weight }}%20-%20%E2%82%B9{{ first_v.price }}{% endwith %})" target="_blank" rel="noopener noreferrer" class="btn-book-sm js-wa-book">
                             Book Now <span>↗</span>
                         </a>
                     </div>

@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 positions[i+1] = (Math.random() - 0.5) * 14;
                 positions[i+2] = (Math.random() - 0.5) * 14;
 
-                // Gold / Champagne ambient RGB
-                colors[i] = 0.77;   
-                colors[i+1] = 0.61; 
-                colors[i+2] = 0.42; 
+                // Soft olive / sage ambient RGB for light theme
+                colors[i] = 0.23;   
+                colors[i+1] = 0.37; 
+                colors[i+2] = 0.26; 
             }
 
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 size: 0.045,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.45,
-                blending: THREE.AdditiveBlending
+                opacity: 0.3,
+                blending: THREE.NormalBlending
             });
 
             const particlesMesh = new THREE.Points(geometry, material);
@@ -664,5 +664,51 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // ===================================================
+    // INTERACTIVE PRODUCT WEIGHT & PRICE SELECTOR
+    // ===================================================
+    const weightPills = document.querySelectorAll('.weight-pill');
+    weightPills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const cardBody = pill.closest('.p-card-body');
+            if (!cardBody) return;
+
+            // Remove active state from sibling pills
+            cardBody.querySelectorAll('.weight-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+
+            const weight = pill.getAttribute('data-weight');
+            const price = pill.getAttribute('data-price');
+            const productName = pill.getAttribute('data-product');
+
+            // Update price display
+            const priceEl = cardBody.querySelector('.js-display-price');
+            if (priceEl) {
+                priceEl.textContent = `₹${price}`;
+                if (hasAnime) {
+                    anime({
+                        targets: priceEl,
+                        scale: [1.25, 1],
+                        opacity: [0.6, 1],
+                        duration: 350,
+                        easing: 'easeOutBack(1.5)'
+                    });
+                }
+            }
+
+            // Update WhatsApp CTA link
+            const waBtn = cardBody.querySelector('.js-wa-book');
+            if (waBtn) {
+                const currentHref = waBtn.getAttribute('href');
+                const baseUrl = currentHref.split('?')[0];
+                const text = `Hi Debasmita, I want to book ${productName} (${weight} - ₹${price})`;
+                waBtn.setAttribute('href', `${baseUrl}?text=${encodeURIComponent(text)}`);
+            }
+        });
+    });
 
 });
