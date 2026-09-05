@@ -981,7 +981,7 @@ img { display: block; max-width: 100%; }
 
 .p-card-img {
     position: relative;
-    height: 150px;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     background: var(--sand);
 }
@@ -989,12 +989,12 @@ img { display: block; max-width: 100%; }
 .p-card-img img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.6s var(--ease-out-expo);
 }
 
 .p-card:hover .p-card-img img {
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
 .p-card-body {
@@ -1643,7 +1643,6 @@ main {
     .cat-block-title { font-size: 1.6rem; }
     .cat-block-desc { font-size: 0.9rem; margin-bottom: 20px; }
     .p-grid { grid-template-columns: 1fr; gap: 16px; }
-    .p-card-img { height: 180px; }
     .p-card-body { padding: 18px; }
     .p-card-header h4 { font-size: 1.05rem; }
     .p-card-desc { font-size: 0.88rem; }
@@ -1725,7 +1724,6 @@ main {
     .marquee-stars { font-size: 0.68rem; }
 
     .products-section { padding: 40px 16px; }
-    .p-card-img { height: 160px; }
     .p-card-body { padding: 14px; }
     .cat-block-title { font-size: 1.4rem; }
     .p-card-header h4 { font-size: 0.95rem; }
@@ -1780,7 +1778,6 @@ main {
     .marquee-card { width: 160px; }
     .marquee-card-img { height: 130px; }
 
-    .p-card-img { height: 140px; }
     .p-card-body { padding: 12px; }
     .p-card-header h4 { font-size: 0.88rem; }
     .p-card-tag { font-size: 0.7rem; }

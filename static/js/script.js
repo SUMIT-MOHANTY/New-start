@@ -105,18 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
             touchMultiplier: isMobile ? 0.6 : 1.8
         });
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
         if (hasGSAP) {
             lenis.on('scroll', ScrollTrigger.update);
             gsap.ticker.add((time) => {
                 lenis.raf(time * 1000);
             });
             gsap.ticker.lagSmoothing(0);
+        } else {
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
         }
     }
 
@@ -369,7 +369,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // INTERACTIVE 3D MOUSE TILT
     // ===================================================
     if (hasAnime) {
-        const tiltCards = document.querySelectorAll('.hero-img-card, .consult-card, .p-card, .pc-card, .marquee-card, .about-heading img');
+        // Tilt ONLY the non-interactive image areas. Tilting whole cards that
+        // contain buttons/pills shifts hit-targets under a moving cursor and
+        // makes clicks feel imprecise — so we keep those cards stable.
+        const tiltCards = document.querySelectorAll('.p-card-img, .pc-img, .about-heading img');
 
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -380,16 +383,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                const rotateX = ((y - centerY) / centerY) * -12;
-                const rotateY = ((x - centerX) / centerX) * 12;
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
 
                 anime({
                     targets: card,
                     rotateX: rotateX,
                     rotateY: rotateY,
-                    translateZ: 15,
-                    duration: 400,
-                    easing: 'easeOutCubic'
+                    translateZ: 10,
+                    duration: 250,
+                    easing: 'easeOutQuad'
                 });
             });
 
@@ -399,8 +402,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     rotateX: 0,
                     rotateY: 0,
                     translateZ: 0,
-                    duration: 600,
-                    easing: 'easeOutBack(1.2)'
+                    duration: 450,
+                    easing: 'easeOutCubic'
                 });
             });
         });

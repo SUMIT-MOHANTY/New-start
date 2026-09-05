@@ -132,7 +132,7 @@ class SiteSetting(models.Model):
             import os
             from django.conf import settings
             full_path = os.path.join(settings.MEDIA_ROOT, self.hero_image.name)
-            if os.path.exists(full_path) and 'hero_card' not in self.hero_image.name and 'hero_banner' not in self.hero_image.name:
+            if os.path.exists(full_path):
                 return self.hero_image.url
         return '/static/img/doc_images/image2.png'
 
