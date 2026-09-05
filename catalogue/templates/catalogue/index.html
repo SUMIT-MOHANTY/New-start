@@ -67,7 +67,7 @@
         <div class="about-heading reveal-left">
             <h2>{% if site_setting %}{{ site_setting.about_title|safe }}{% else %}About<br>Fit & Fine<br>Forever{% endif %}</h2>
             
-            {% if site_setting and site_setting.founder_image %}
+            {% if site_setting %}
             <div style="margin-top: 30px; text-align: center;">
                 <img src="{{ site_setting.get_founder_image }}" alt="{{ site_setting.founder_name }}" style="width: 100%; max-width: 280px; height: auto; aspect-ratio: 1/1; border-radius: 50%; object-fit: cover; box-shadow: 0 24px 48px rgba(0,0,0,0.1); border: 8px solid #fff; margin: 0 auto;">
                 <h4 class="founder-name" style="margin-top: 24px; font-size: clamp(1.1rem, 3.5vw, 1.4rem); font-family: var(--font-serif); color: var(--text-dark);">{{ site_setting.founder_name }}</h4>

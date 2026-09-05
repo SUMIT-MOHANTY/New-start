@@ -120,12 +120,20 @@ class SiteSetting(models.Model):
 
     def get_founder_image(self):
         if self.founder_image:
-            return self.founder_image.url
-        return '/static/img/placeholder.png'
+            import os
+            from django.conf import settings
+            full_path = os.path.join(settings.MEDIA_ROOT, self.founder_image.name)
+            if os.path.exists(full_path):
+                return self.founder_image.url
+        return '/static/img/founder.jpeg'
 
     def get_hero_image(self):
         if self.hero_image:
-            return self.hero_image.url
+            import os
+            from django.conf import settings
+            full_path = os.path.join(settings.MEDIA_ROOT, self.hero_image.name)
+            if os.path.exists(full_path):
+                return self.hero_image.url
         return '/static/img/doc_images/image2.png'
 
     def get_whatsapp_number(self):
