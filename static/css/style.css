@@ -733,7 +733,7 @@ img { display: block; max-width: 100%; }
 
 /* ===== CONSULTATION ===== */
 .consultation-section {
-    padding: 120px 40px;
+    padding: 120px 40px 80px;
     max-width: 1360px;
     margin: 0 auto;
 }
@@ -870,9 +870,14 @@ img { display: block; max-width: 100%; }
 
 /* ===== PRODUCTS SECTION ===== */
 .products-section {
-    padding: 120px 40px;
+    padding: 60px 40px 110px;
     max-width: 1360px;
     margin: 0 auto;
+}
+
+/* Tighter spacing for the products intro header (03 // HERBAL COLLECTION block) */
+.products-section .section-subtitle {
+    margin-bottom: 32px;
 }
 
 .products-controls {
@@ -881,7 +886,7 @@ img { display: block; max-width: 100%; }
     align-items: center;
     flex-wrap: wrap;
     gap: 24px;
-    margin-bottom: 56px;
+    margin-bottom: 40px;
 }
 
 .search-wrap {
