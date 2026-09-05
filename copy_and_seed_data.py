@@ -382,6 +382,8 @@ def run():
     setting.about_title = "About Fit & Fine Forever"
     setting.about_text = "<p>At Fit & Fine Forever, we believe that healthy eating should be simple, enjoyable, and accessible to everyone. Our mission is to help you nourish your body and mind by providing personalized meal plans, delicious recipes, and practical tools that fit your lifestyle.</p><p>Debasmita brings over 12 years of experience as a nutrition consultant and lifestyle coach. Whether you're a busy professional, a health enthusiast, or just starting your wellness journey — Fit & Fine Forever makes it easy to plan, prepare, and enjoy nutritious meals that fuel your day.</p>"
     setting.founder_name = "Nutritionist Debasmita"
+    setting.hero_image = None
+    setting.founder_image = None
     setting.save()
     print("Seeded SiteSetting successfully.")
 
