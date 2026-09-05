@@ -158,114 +158,12 @@
 </section>
 
 <!-- ============================================
-     TRANSFORMATIONS — Immersive dark marquee
-     with infinite auto-scroll ticker
-     ============================================ -->
-<section id="testimonials" class="transformations-section">
-    <div class="watermark-text watermark-testimonials">RESULTS</div>
-    <div class="transform-header reveal">
-        <div class="section-idx-header" style="justify-content: center; margin-bottom: 14px;">
-            <span class="idx-num" style="color: var(--gold);">03 //</span> <span class="idx-title" style="color: rgba(245,241,235,0.7);">CLIENT TRANSFORMATIONS</span>
-        </div>
-        <h2 class="transform-title">Real<br><em>Transformations</em></h2>
-        <p class="transform-subtitle">1000+ verified client results. Click any card to view the full proof screenshot.</p>
-    </div>
-
-    <!-- Infinite Marquee Row 1 — scrolls left -->
-    <div class="marquee-wrapper">
-        <div class="marquee-track marquee-left">
-            {% for test in testimonials %}
-            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
-                    <div class="marquee-card-overlay">
-                        <i class="fa-solid fa-expand"></i>
-                    </div>
-                </div>
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                </div>
-            </div>
-            {% endfor %}
-            <!-- Duplicate set for seamless loop -->
-            {% for test in testimonials %}
-            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
-                    <div class="marquee-card-overlay">
-                        <i class="fa-solid fa-expand"></i>
-                    </div>
-                </div>
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- Infinite Marquee Row 2 — scrolls right (reverse) -->
-    <div class="marquee-wrapper" style="margin-top: 24px;">
-        <div class="marquee-track marquee-right">
-            {% for test in testimonials reversed %}
-            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
-                    <div class="marquee-card-overlay">
-                        <i class="fa-solid fa-expand"></i>
-                    </div>
-                </div>
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                </div>
-            </div>
-            {% endfor %}
-            {% for test in testimonials reversed %}
-            <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
-                    <div class="marquee-card-overlay">
-                        <i class="fa-solid fa-expand"></i>
-                    </div>
-                </div>
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="transform-cta reveal" style="text-align: center; margin-top: 50px;">
-        <a href="https://wa.me/{% firstof whatsapp_number '919007104448' %}?text=Hi%20Debasmita,%20I%20saw%20your%20client%20results%20and%20I%20want%20to%20start%20my%20transformation!" target="_blank" class="btn-hero btn-hero-fill" style="border-color: var(--gold); background: var(--gold); color: var(--dark);">
-            Start Your Transformation <span>↗</span>
-        </a>
-    </div>
-</section>
-
-<!-- ============================================
      PRODUCTS — Grid with staggered card reveals
      ============================================ -->
 <section id="products" class="products-section">
     <div class="watermark-text watermark-products">WELLNESS</div>
     <div class="section-idx-header reveal">
-        <span class="idx-num">04 //</span> <span class="idx-title">HERBAL COLLECTION</span>
+        <span class="idx-num">03 //</span> <span class="idx-title">HERBAL COLLECTION</span>
     </div>
     <h2 class="section-title reveal" style="transition-delay: 80ms;">Wellness Formulations</h2>
     <p class="section-subtitle reveal" style="transition-delay: 160ms; color: var(--olive); font-weight: 700; font-size: 1.25rem;">Book Any Product And Get Flat 12% Off</p>
