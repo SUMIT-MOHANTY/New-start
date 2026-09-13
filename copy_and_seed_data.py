@@ -31,7 +31,7 @@ def run():
 
     # 4. Superuser
     if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'admin')
+        User.objects.create_superuser('admin', 'admin@nutritionistdebasmita.com', 'AdminPass123!')
 
     # 5. Clear Old Products & Categories
     Product.objects.all().delete()
