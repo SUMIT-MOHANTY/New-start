@@ -110,7 +110,7 @@ def run():
             'subtitle_tag': 'Abdominal Fat & Bloating',
             'description': 'Specially formulated detox tea to target abdominal fat, fight inflammation, burn extra calories, boost daily energy, and reduce water retention.',
             'benefits': 'Weight Control & Fat Loss, Fight Inflammation, Burn Calorie, Improve Digestion, Boost Energy, Reduce Water Retention',
-            'price': 499, 'offer_price': 349, 'weight_options': tea_standard_weights, 'weight': '70g / 100g / 150g / 30-60 Tea Bags',
+            'price': 499, 'offer_price': 499, 'weight_options': '30 Tea Bags (₹499) | 60 Tea Bags (₹980)', 'weight': '30 Tea Bags / 60 Tea Bags',
             'image_url': '/media/products/tummy_fat_detox_tea.jpeg', 'is_popular': True, 'order': 3
         },
         {
@@ -230,7 +230,7 @@ def run():
             'description': 'Exquisite single-estate Darjeeling tea known as the champagne of teas, delivering a floral aroma and refined muscatel flavor.',
             'benefits': 'Refined Taste, Heart Health, Gentle Energy, Focus',
             'price': 499, 'offer_price': 399, 'weight_options': '100g (₹399 - MRP ₹499)', 'weight': '100g',
-            'image_url': '/static/img/doc_images/image18.png', 'is_popular': False, 'order': 16
+            'image_url': '/media/products/golden_darjeeling_tea.jpeg', 'is_popular': False, 'order': 16
         },
 
         # --- Plant Based Protein ---
@@ -240,7 +240,7 @@ def run():
             'subtitle_tag': 'Best Plant-Based Protein',
             'description': '100% natural, chemical-free, gluten-free traditional plant protein superfood drink mix made with roasted gram flour, mint leaves, cumin, coriander, black pepper, saunf, dry mango, chilli, pink salt & black salt. FSSAI Licensed (22824131000442).',
             'benefits': 'Plant Based Protein, 100% Natural, Zero Preservatives & Chemical, Gluten Free, Sustained Energy, Cooling Gut Support',
-            'price': 220, 'offer_price': 199, 'weight_options': '250g (₹199 - MRP ₹220) | Combo Offer (₹380)', 'weight': '250g',
+            'price': 249, 'offer_price': 249, 'weight_options': '250g (₹249) | Combo Offer (₹449)', 'weight': '250g / Combo Offer',
             'image_url': '/media/products/sattu_pre_mix.jpeg', 'is_popular': True, 'order': 17
         },
 
@@ -251,7 +251,7 @@ def run():
             'subtitle_tag': 'Gut Restoration & Constipation Relief',
             'description': 'Potent morning detox drink mix that heals gut lining, relieves chronic constipation, improves digestion, aids weight management, and reduces systemic inflammation.',
             'benefits': 'Weight Management, Cure Constipation, Improve Digestion, Detoxification, Reduces Inflammation',
-            'price': 349, 'offer_price': 250, 'weight_options': '130g (₹250 - MRP ₹349) | 250g (₹480 - MRP ₹670)', 'weight': '130g / 250g',
+            'price': 299, 'offer_price': 299, 'weight_options': '130g (₹299) | 250g (₹549)', 'weight': '130g / 250g',
             'image_url': '/media/products/gut_health_detox_drink.jpeg', 'is_popular': True, 'order': 18
         },
 
@@ -262,7 +262,7 @@ def run():
             'subtitle_tag': 'Localized Fat Burn & Firming',
             'description': '100% natural herbal oil blend formulated to stimulate localized blood circulation, reduce cellulite appearance, and firm loose skin tissue.',
             'benefits': 'Localized Fat Burn, Skin Firming, Cellulite Reduction, 100% Natural, Zero Side Effects',
-            'price': 350, 'offer_price': 350, 'weight_options': '100ml (₹350) | 300ml (₹999)', 'weight': '100ml / 300ml',
+            'price': 399, 'offer_price': 399, 'weight_options': '100ml (₹399) | 300ml (₹1155)', 'weight': '100ml / 300ml',
             'image_url': '/media/products/slimming_oil.jpeg', 'is_popular': False, 'order': 19
         },
 

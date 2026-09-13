@@ -25,7 +25,7 @@
     <nav class="navbar">
         <div class="nav-inner">
             <a href="{% url 'index' %}" class="logo-link">
-                <img src="{% static 'img/brand_logo.png' %}" alt="Fit & Fine Forever Logo" class="logo-img" style="height: 42px; border-radius: 50%; border: 1px solid rgba(58,95,67,0.3);">
+                <img src="{% static 'img/brand_logo.png' %}" alt="Fit & Fine Forever Logo" class="logo-img" style="height: 52px; width: auto; border-radius: 12px; background: #ffffff; padding: 3px; border: 1.5px solid rgba(198, 156, 109, 0.4); box-shadow: 0 4px 14px rgba(0,0,0,0.08); object-fit: contain;">
                 <span class="logo-text">Fit & Fine Forever</span>
             </a>
 
@@ -80,7 +80,10 @@
     <footer class="site-footer" id="contact">
         <div class="footer-inner">
             <div class="footer-col">
-                <h3>Fit & Fine Forever</h3>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                    <img src="{% static 'img/brand_logo.png' %}" alt="Fit & Fine Forever Logo" style="height: 44px; width: auto; border-radius: 10px; background: #ffffff; padding: 2px; border: 1.5px solid rgba(198, 156, 109, 0.4); object-fit: contain;">
+                    <h3 style="margin-bottom: 0;">Fit & Fine Forever</h3>
+                </div>
                 <p>Personalized diet plans and natural products by Nutritionist Debasmita Chandra with 12+ years of experience.</p>
                 <p style="margin-top: 12px;"><i class="fa-solid fa-shield-heart" style="color: #C69C6D; margin-right: 8px;"></i>100% Natural • Zero Side Effects</p>
             </div>

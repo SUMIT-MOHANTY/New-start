@@ -43,9 +43,13 @@
         }
 
         .dash-logo img {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            border: 1px solid #3A5F43;
+            height: 46px; width: auto;
+            border-radius: 10px;
+            background: #ffffff;
+            padding: 3px;
+            border: 1.5px solid rgba(198, 156, 109, 0.4);
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         }
 
         .dash-logo span {
@@ -475,8 +479,8 @@
     <!-- Top Bar -->
     <nav class="dash-nav">
         <a href="{% url 'admin_dashboard' %}" class="dash-logo">
-            <img src="{% static 'img/brand_logo.png' %}" alt="Logo">
-            <span>Fit & Fine Admin Dashboard</span>
+            <img src="{% static 'img/brand_logo.png' %}" alt="Fit & Fine Forever Logo">
+            <span>Fit & Fine Forever — Admin Dashboard</span>
         </a>
 
         <div class="dash-user">

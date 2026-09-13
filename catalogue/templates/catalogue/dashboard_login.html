@@ -36,10 +36,14 @@
             margin-bottom: 32px;
         }
         .login-logo {
-            width: 64px; height: 64px;
-            border-radius: 50%;
-            margin-bottom: 16px;
-            border: 2px solid #3A5F43;
+            width: 80px; height: 80px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            border: 2px solid rgba(198, 156, 109, 0.5);
+            background: #ffffff;
+            padding: 4px;
+            object-fit: contain;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
         .login-header h2 {
             font-family: 'Playfair Display', serif;
@@ -135,9 +139,9 @@
 
     <div class="login-card">
         <div class="login-header">
-            <img src="{% static 'img/brand_logo.png' %}" alt="Logo" class="login-logo">
-            <h2>Management Portal</h2>
-            <p>Sign in to manage products, site content & client proof</p>
+            <img src="{% static 'img/brand_logo.png' %}" alt="Fit & Fine Forever Logo" class="login-logo">
+            <h2>Fit & Fine Forever</h2>
+            <p>Admin Management Portal</p>
         </div>
 
         {% if messages %}

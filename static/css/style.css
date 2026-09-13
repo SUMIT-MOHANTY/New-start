@@ -460,17 +460,28 @@ img {
 }
 
 .logo-img {
-    height: 36px;
+    height: 52px;
     width: auto;
-    border-radius: 6px;
+    border-radius: 12px;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 3px;
+    border: 1.5px solid rgba(198, 156, 109, 0.4);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-link:hover .logo-img {
+    transform: scale(1.04);
+    box-shadow: 0 6px 18px rgba(198, 156, 109, 0.25);
 }
 
 .logo-text {
     font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
     color: var(--text-dark);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
 }
 
 .nav-menu {
