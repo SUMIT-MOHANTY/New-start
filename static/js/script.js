@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     { el: document.querySelector('.metric:nth-child(1) h4'), targetVal: 12, suffix: '+ Yrs' },
                     { el: document.querySelector('.metric:nth-child(2) h4'), targetVal: 100, suffix: '%' },
                     { el: document.querySelector('.metric:nth-child(3) h4'), targetVal: 0, suffix: '' },
-                    { el: document.querySelector('.metric:nth-child(4) h4'), targetVal: 1000, suffix: '+' }
+                    { el: document.querySelector('.metric:nth-child(4) h4'), targetVal: 50, suffix: 'K+' }
                 ];
 
                 metricItems.forEach(item => {
