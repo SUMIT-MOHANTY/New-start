@@ -13,7 +13,7 @@ def index(request):
     # without deleting any data). Rows with a photo attached win over imageless
     # duplicates, then oldest row wins.
     seen, unique_testimonials = set(), []
-    for t in sorted(testimonials, key=lambda t: (0 if t.image else 1, t.id)):
+    for t in sorted(testimonials, key=lambda t: (0 if t.get_image() else 1, t.id)):
         key = (t.client_name, t.subtitle)
         if key not in seen:
             seen.add(key)

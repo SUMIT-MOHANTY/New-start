@@ -312,68 +312,85 @@ def run():
     print(f"Seeded {len(products_data)} products successfully according to Fit & Fine Forever PDF!")
 
     # 8. Testimonials Seed Data
+    # Client transformation photos ship with the code in static/ so they exist
+    # on every deploy (media/ is gitignored and may not persist). Client names
+    # are stored in the DB for admin reference but are NOT shown on the site.
     testimonials_data = [
         {
             'client_name': 'Ananya Roy',
             'subtitle': 'PCOD & Weight Loss Success',
             'review_text': 'Debasmita ma\'am guided me with simple home cooked diet plans. My PCOD symptoms improved drastically and I lost 7 kg in 2 months!',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_1.jpeg',
             'rating': 5, 'order': 1
         },
         {
             'client_name': 'Rajesh Sharma',
             'subtitle': 'Diabetes & Gut Detox',
             'review_text': 'The Gut Health Detox Drink combined with the personalized meal plan stabilized my blood sugar level naturally without rigid starvation.',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_2.jpeg',
             'rating': 5, 'order': 2
         },
         {
             'client_name': 'Sneha Chatterjee',
             'subtitle': 'Postpartum Health Recovery',
             'review_text': 'I was struggling with low energy and weight gain post pregnancy. Debasmita\'s care and natural teas brought back my strength and skin glow.',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_3.jpeg',
             'rating': 5, 'order': 3
         },
         {
             'client_name': 'Pooja Verma',
             'subtitle': 'Skin Glow & Thyroid Management',
             'review_text': 'Ever Youthful Tea and Thyrocare Tea have done wonders for my skin pigmentation and thyroid sluggishness. Highly recommended!',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_4.jpeg',
             'rating': 5, 'order': 4
         },
         {
             'client_name': 'Vikramaditya S.',
             'subtitle': 'Fat Cutter & Active Fitness',
             'review_text': 'Fat Cutter Tea along with Sattu Pre-mix gives amazing clean energy. Reduced tummy bloat in less than 3 weeks!',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_5.jpeg',
             'rating': 5, 'order': 5
         },
         {
             'client_name': 'Meera Sen',
             'subtitle': 'Hypertension & Weight Balance',
             'review_text': '100% natural, zero side effects. The daily follow-up from Debasmita kept me accountable throughout my transformation.',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_6.jpeg',
             'rating': 5, 'order': 6
         },
         {
             'client_name': 'Ritu Mukherjee',
             'subtitle': 'Healthy Lifestyle Routine',
             'review_text': 'No artificial supplements, only home cooked food and effective tea blends. Truly a life-changing experience!',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_7.jpeg',
             'rating': 5, 'order': 7
         },
         {
             'client_name': 'Priyanka Das',
             'subtitle': 'Inflammation & Radiant Skin',
             'review_text': 'The 2-in-1 Skin Glow tea and personalized consultation transformed my hair texture and reduced facial inflammation.',
-            'image_url': '',
+            'image_url': '/static/img/testimonials/testimonial_8.jpeg',
             'rating': 5, 'order': 8
         }
     ]
 
+    # Idempotent: exactly one row per client, no matter how many times this
+    # script runs (the old version created a fresh duplicate set on every
+    # deploy). Rows added from the dashboard with new client names are kept.
+    removed_dups = 0
     for tdata in testimonials_data:
-        Testimonial.objects.create(**tdata)
-    print(f"Seeded {len(testimonials_data)} testimonials successfully.")
+        existing = Testimonial.objects.filter(client_name=tdata['client_name']).order_by('id')
+        first = existing.first()
+        if first:
+            for dup in existing[1:]:
+                dup.delete()
+                removed_dups += 1
+            for k, v in tdata.items():
+                setattr(first, k, v)
+            first.save()
+        else:
+            Testimonial.objects.create(**tdata)
+    print(f"Seeded {len(testimonials_data)} testimonials successfully (idempotent, removed {removed_dups} duplicates).")
 
     # 9. Site Settings Seed Data
     setting, _ = SiteSetting.objects.get_or_create(id=1)
