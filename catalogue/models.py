@@ -128,13 +128,9 @@ class SiteSetting(models.Model):
         return '/static/img/founder.jpeg'
 
     def get_hero_image(self):
-        if self.hero_image:
-            import os
-            from django.conf import settings
-            full_path = os.path.join(settings.MEDIA_ROOT, self.hero_image.name)
-            if os.path.exists(full_path):
-                return self.hero_image.url
-        return '/static/img/doc_images/image2.png'
+        # Locked brand hero image — always served from static, regardless of
+        # dashboard uploads or DB state.
+        return '/static/img/hero_card.png'
 
     def get_whatsapp_number(self):
         """Return the digits-only WhatsApp number for use in wa.me links."""
