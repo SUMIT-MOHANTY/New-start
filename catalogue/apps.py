@@ -9,6 +9,6 @@ class CatalogueConfig(AppConfig):
     def ready(self):
         """Create media directories on startup so file uploads work on Railway."""
         from django.conf import settings
-        for subdir in ('site', 'products', 'testimonials'):
+        for subdir in ('site', 'products'):
             dir_path = Path(settings.MEDIA_ROOT) / subdir
             dir_path.mkdir(parents=True, exist_ok=True)
