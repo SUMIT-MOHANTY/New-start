@@ -36,8 +36,12 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
 
 # Comma-separated host list. Set on Railway to your domain, e.g. myapp.up.railway.app
 ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '*').split(',') if h.strip()]
+if '*' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.extend(['.nutritionistdebasmita.com', 'nutritionistdebasmita.com', '.up.railway.app', 'localhost', '127.0.0.1'])
 
-CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://*.ngrok-free.dev,https://*.ngrok.io,https://*.ngrok-free.app,https://*.ngrok.app').split(',') if o.strip()]
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://nutritionistdebasmita.com,https://www.nutritionistdebasmita.com,https://*.up.railway.app,https://*.ngrok-free.dev,https://*.ngrok.io,https://*.ngrok-free.app,https://*.ngrok.app').split(',') if o.strip()]
+if 'https://nutritionistdebasmita.com' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.extend(['https://nutritionistdebasmita.com', 'https://www.nutritionistdebasmita.com'])
 
 
 # Application definition
