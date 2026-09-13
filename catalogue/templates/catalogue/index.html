@@ -275,45 +275,29 @@
     <div class="marquee-wrapper">
         <div class="marquee-track marquee-left">
             {% for test in testimonials %}
+            {% if test.get_image %}
             <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                {% if test.get_image %}
                 <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <img src="{{ test.get_image }}" alt="Transformation Proof" loading="lazy">
                     <div class="marquee-card-overlay">
                         <i class="fa-solid fa-expand"></i>
                     </div>
                 </div>
-                {% endif %}
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                    {% if test.review_text %}<p class="marquee-sub" style="margin-top:6px; font-style:italic;">“{{ test.review_text|truncatewords:15 }}”</p>{% endif %}
-                </div>
             </div>
+            {% endif %}
             {% endfor %}
             <!-- Duplicate set for seamless loop -->
             {% for test in testimonials %}
+            {% if test.get_image %}
             <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                {% if test.get_image %}
                 <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <img src="{{ test.get_image }}" alt="Transformation Proof" loading="lazy">
                     <div class="marquee-card-overlay">
                         <i class="fa-solid fa-expand"></i>
                     </div>
                 </div>
-                {% endif %}
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                    {% if test.review_text %}<p class="marquee-sub" style="margin-top:6px; font-style:italic;">“{{ test.review_text|truncatewords:15 }}”</p>{% endif %}
-                </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -322,44 +306,28 @@
     <div class="marquee-wrapper" style="margin-top: 24px;">
         <div class="marquee-track marquee-right">
             {% for test in testimonials reversed %}
+            {% if test.get_image %}
             <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                {% if test.get_image %}
                 <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <img src="{{ test.get_image }}" alt="Transformation Proof" loading="lazy">
                     <div class="marquee-card-overlay">
                         <i class="fa-solid fa-expand"></i>
                     </div>
                 </div>
-                {% endif %}
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                    {% if test.review_text %}<p class="marquee-sub" style="margin-top:6px; font-style:italic;">“{{ test.review_text|truncatewords:15 }}”</p>{% endif %}
-                </div>
             </div>
+            {% endif %}
             {% endfor %}
             {% for test in testimonials reversed %}
+            {% if test.get_image %}
             <div class="marquee-card t-card-click" data-img="{{ test.get_image }}">
-                {% if test.get_image %}
                 <div class="marquee-card-img">
-                    <img src="{{ test.get_image }}" alt="{{ test.client_name }}" loading="lazy">
+                    <img src="{{ test.get_image }}" alt="Transformation Proof" loading="lazy">
                     <div class="marquee-card-overlay">
                         <i class="fa-solid fa-expand"></i>
                     </div>
                 </div>
-                {% endif %}
-                <div class="marquee-card-info">
-                    <div class="marquee-stars">
-                        {% for i in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}
-                    </div>
-                    <h4>{{ test.client_name }}</h4>
-                    {% if test.subtitle %}<p class="marquee-sub">{{ test.subtitle }}</p>{% endif %}
-                    {% if test.review_text %}<p class="marquee-sub" style="margin-top:6px; font-style:italic;">“{{ test.review_text|truncatewords:15 }}”</p>{% endif %}
-                </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

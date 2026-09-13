@@ -7,6 +7,20 @@ from .models import Category, Product, Testimonial, SiteSetting
 def index(request):
     categories = Category.objects.prefetch_related('products').all()
     testimonials = Testimonial.objects.filter(is_active=True).all()
+
+    # Show only the first occurrence of each client (seed scripts were run
+    # multiple times, creating duplicate rows; this keeps the homepage clean
+    # without deleting any data). Rows with a photo attached win over imageless
+    # duplicates, then oldest row wins.
+    seen, unique_testimonials = set(), []
+    for t in sorted(testimonials, key=lambda t: (0 if t.image else 1, t.id)):
+        key = (t.client_name, t.subtitle)
+        if key not in seen:
+            seen.add(key)
+            unique_testimonials.append(t)
+    unique_testimonials.sort(key=lambda t: (t.order, -t.id))
+    testimonials = unique_testimonials
+
     site_setting = SiteSetting.objects.first()
     # Consultation pricing is managed via the 'Diet Consultation' product in admin.
     # Fallbacks only apply if that product is missing/deleted.

@@ -992,7 +992,7 @@ img {
 
 /* ===== PRODUCTS SECTION ===== */
 .products-section {
-    padding: 60px 40px 110px;
+    padding: 60px 40px 70px;
     max-width: 1360px;
     margin: 0 auto;
 }
@@ -1000,6 +1000,11 @@ img {
 /* Tighter spacing for the products intro header (03 // HERBAL COLLECTION block) */
 .products-section .section-subtitle {
     margin-bottom: 32px;
+}
+
+/* Kill the dead space between the last product grid and testimonials */
+.cat-block:last-of-type {
+    margin-bottom: 0;
 }
 
 .products-controls {
@@ -1441,7 +1446,8 @@ img {
 
 .marquee-track {
     display: flex;
-    gap: 24px;
+    align-items: center;
+    gap: 20px;
     width: max-content;
     will-change: transform;
 }
@@ -1481,32 +1487,34 @@ img {
 /* Marquee Card */
 .marquee-card {
     flex-shrink: 0;
-    width: 280px;
-    background: var(--dark-card);
-    border-radius: 18px;
+    width: 250px;
+    background: transparent;
+    border-radius: 14px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
     transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
 }
 
 .marquee-card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    border-color: rgba(198, 156, 109, 0.3);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(198, 156, 109, 0.5);
 }
 
 .marquee-card-img {
-    height: 260px;
+    width: 100%;
+    height: auto;
     overflow: hidden;
     position: relative;
-    background: #111;
+    display: block;
 }
 
 .marquee-card-img img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
+    object-fit: contain;
     transition: transform 0.5s ease;
 }
 
@@ -2006,11 +2014,11 @@ main {
     }
 
     .marquee-card {
-        width: 230px;
+        width: 210px;
     }
 
     .marquee-card-img {
-        height: 200px;
+        height: auto;
     }
 
     .marquee-track {
@@ -2275,11 +2283,11 @@ main {
     }
 
     .marquee-card {
-        width: 190px;
+        width: 170px;
     }
 
     .marquee-card-img {
-        height: 160px;
+        height: auto;
     }
 
     .marquee-card-info {
@@ -2464,11 +2472,11 @@ main {
     }
 
     .marquee-card {
-        width: 160px;
+        width: 140px;
     }
 
     .marquee-card-img {
-        height: 130px;
+        height: auto;
     }
 
     .p-card-body {
@@ -2572,4 +2580,247 @@ main {
 /* Ensure the white search input keeps dark placeholder text */
 #product-search-input::placeholder {
     color: var(--text-muted);
+}
+
+/* ============================================
+   TESTIMONIALS — Client transformations
+   ============================================ */
+.testimonials-section {
+    padding: 70px 8% 90px;
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.t-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+    position: relative;
+    z-index: 2;
+}
+
+.t-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+    transition: var(--transition);
+}
+
+.t-card.t-card-click {
+    cursor: zoom-in;
+}
+
+.t-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.07);
+    border-color: rgba(58, 95, 67, 0.2);
+}
+
+.t-card-img {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--sand);
+}
+
+.t-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.t-card:hover .t-card-img img {
+    transform: scale(1.05);
+}
+
+.t-card-zoom {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--olive);
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.t-card:hover .t-card-zoom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.t-card-img-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(58, 95, 67, 0.06) 0%, rgba(198, 156, 109, 0.08) 100%);
+}
+
+.t-card-img-fallback span {
+    font-size: 2.4rem;
+    color: rgba(58, 95, 67, 0.25);
+}
+
+.t-card-body {
+    padding: 22px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+}
+
+.t-card-stars {
+    color: var(--gold);
+    font-size: 0.8rem;
+    display: flex;
+    gap: 3px;
+}
+
+.t-card-stars .fa-regular {
+    color: var(--border-medium);
+}
+
+.t-card-text {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-weight: 300;
+    flex: 1;
+}
+
+.t-card-client {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+}
+
+.t-card-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--olive);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.t-card-client h5 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.t-card-client p {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin: 2px 0 0 0;
+}
+
+.t-card-wa {
+    margin-left: auto;
+    color: #25D366;
+    font-size: 1.1rem;
+    opacity: 0.85;
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(26, 35, 32, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4vh 4vw;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-inner {
+    max-width: min(680px, 90vw);
+    max-height: 88vh;
+    transform-style: preserve-3d;
+}
+
+.lightbox-inner img {
+    max-width: 100%;
+    max-height: 88vh;
+    border-radius: 16px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+    display: block;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--white);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: rotate(90deg);
+}
+
+/* Testimonials responsive */
+@media (max-width: 768px) {
+    .testimonials-section {
+        padding: 56px 6% 64px;
+    }
+
+    .t-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 40px;
+    }
+
+    .lightbox-close {
+        top: 14px;
+        right: 14px;
+    }
 }
