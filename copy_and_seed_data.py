@@ -63,9 +63,9 @@ def run():
         order=4
     )
     body_care = Category.objects.create(
-        name='Body Care & Oils',
+        name='Body Care & Soaps',
         slug='body-care',
-        description='100% Herbal body firming and localized fat reduction oils.',
+        description='100% Herbal body firming oils and natural handcrafted skincare soaps.',
         order=5
     )
     combo_offers = Category.objects.create(
@@ -255,7 +255,7 @@ def run():
             'image_url': '/media/products/gut_health_detox_drink.jpeg', 'is_popular': True, 'order': 18
         },
 
-        # --- Body Care & Oils ---
+        # --- Body Care & Soaps ---
         {
             'category': body_care,
             'name': 'Slimming Oil',
@@ -264,6 +264,24 @@ def run():
             'benefits': 'Localized Fat Burn, Skin Firming, Cellulite Reduction, 100% Natural, Zero Side Effects',
             'price': 399, 'offer_price': 399, 'weight_options': '100ml (₹399) | 300ml (₹1155)', 'weight': '100ml / 300ml',
             'image_url': '/media/products/slimming_oil.jpeg', 'is_popular': False, 'order': 19
+        },
+        {
+            'category': body_care,
+            'name': 'Anti Tan Soap',
+            'subtitle_tag': 'Tan Removal & Natural Glow',
+            'description': 'Handcrafted natural anti-tan soap enriched with sandalwood, almonds, and saffron to reduce tan, brighten skin tone, cleanse deeply, moisturise skin, and deliver a healthy natural glow.',
+            'benefits': 'Reduces Tan, Brightens Skin, Cleanses Deeply, Moisturises Skin, Gives a Natural Glow',
+            'price': 199, 'offer_price': 160, 'weight_options': '1 Bar (₹160 - MRP ₹199)', 'weight': '1 Bar',
+            'image_url': '/media/products/anti_tan_soap.jpg', 'is_popular': True, 'order': 20
+        },
+        {
+            'category': body_care,
+            'name': 'Pure Glycerin Soap',
+            'subtitle_tag': 'Gentle Moisturising Care',
+            'description': 'Gentle, skin-safe pure glycerin soap infused with aloe vera, coconut oil, vitamin E, honey, and lavender for deep moisturisation, soothing nourishment, natural glow, and a relaxing aroma.',
+            'benefits': 'Deep Moisturisation, Soothes & Nourishes Skin, Gives Natural Glow, Gentle & Skin Safe, Relaxing Aroma',
+            'price': 199, 'offer_price': 150, 'weight_options': '1 Bar (₹150 - MRP ₹199)', 'weight': '1 Bar',
+            'image_url': '/media/products/pure_glycerin_soap.jpg', 'is_popular': True, 'order': 21
         },
 
         # --- Combo Offers ---
@@ -274,16 +292,16 @@ def run():
             'description': 'Comprehensive fat burning and detox package combining Fat Cutter Tea, Gut Health Detox Drink, and Slimming Tea for accelerated weight loss results.',
             'benefits': 'Complete Fat Loss Kit, Accelerated Detox, Synergistic Herbal Benefits, Maximum Savings',
             'price': 1400, 'offer_price': 1075, 'weight_options': 'Complete Kit (₹1075 - Save ₹325)', 'weight': 'Combo Pack',
-            'image_url': '/static/img/doc_images/combo_mega.jpg', 'is_popular': True, 'order': 20
+            'image_url': '/static/img/doc_images/combo_mega.jpg', 'is_popular': True, 'order': 22
         },
         {
             'category': combo_offers,
             'name': 'Starter Detox Combo',
-            'subtitle_tag': 'Gut & Skin Renewal Kit',
-            'description': 'Perfect starter wellness kit combining Gut Health Detox Drink and Ever Youthful Skin Tea for gut reset and radiant skin glow.',
-            'benefits': 'Gut Reset, Skin Glow, Cellular Detox, Starter Discount',
+            'subtitle_tag': 'Weight Management Kit',
+            'description': 'Perfect starter wellness kit combining Fat Cutter Tea and Fat To Fab Slimming Tea for metabolism boost, fat burn, and effective weight management.',
+            'benefits': 'Weight Management, Boosts Metabolism, Detox & Digestion, Starter Discount',
             'price': 1100, 'offer_price': 825, 'weight_options': 'Starter Pack (₹825 - Save ₹275)', 'weight': 'Combo Pack',
-            'image_url': '/static/img/doc_images/combo_starter.jpg', 'is_popular': False, 'order': 21
+            'image_url': '/static/img/doc_images/combo_starter.jpg', 'is_popular': False, 'order': 23
         },
         {
             'category': combo_offers,
@@ -292,7 +310,25 @@ def run():
             'description': 'Ultimate all-in-one wellness bundle featuring Wellness Tea, Sattu Protein Pre-Mix, Gut Detox Drink, and Slimming Oil for holistic health transform.',
             'benefits': 'Full Body Transformation, Hormonal & Digestive Support, Best Value Package',
             'price': 1800, 'offer_price': 1425, 'weight_options': 'Ultimate Kit (₹1425 - Save ₹375)', 'weight': 'Combo Pack',
-            'image_url': '/static/img/doc_images/combo_ultimate.jpg', 'is_popular': True, 'order': 22
+            'image_url': '/static/img/doc_images/combo_ultimate.jpg', 'is_popular': True, 'order': 24
+        },
+        {
+            'category': combo_offers,
+            'name': 'Best Women Combo Tea',
+            'subtitle_tag': 'Slimming & PCOS / PCOD Pack',
+            'description': 'Special women wellness combo pack combining Fat To Fab Slimming Tea and Cure PCOD/PCOS Women Care Tea to aid weight management, balance hormones, support a healthy menstrual cycle, and improve digestion & metabolism.',
+            'benefits': 'Helps in Weight Management, Balances Hormones, Supports Healthy Menstrual Cycle, Improves Digestion & Metabolism',
+            'price': 699, 'offer_price': 699, 'weight_options': 'Combo Offer Pack (₹699)', 'weight': 'Combo Offer Pack',
+            'image_url': '/static/img/doc_images/best_women_combo_tea.jpg', 'is_popular': True, 'order': 25
+        },
+        {
+            'category': combo_offers,
+            'name': 'Winter Care Slimming Kit',
+            'subtitle_tag': '4-in-1 Winter Offer Pack',
+            'description': 'Complete 4-pack winter slimming combo featuring Fat To Fab Slimming Tea, Fat Cutter Tea, Ever Youthful Tea, and Gut Health Detox Drink to boost metabolism, control weight, improve digestion, and enhance immunity.',
+            'benefits': 'Boost Metabolism, Control Weight, Improve Digestion, Enhance Immunity',
+            'price': 1099, 'offer_price': 1099, 'weight_options': 'Offer Pack (₹1099)', 'weight': 'Offer Pack',
+            'image_url': '/static/img/doc_images/winter_care_slimming_kit.jpg', 'is_popular': True, 'order': 26
         },
 
         # --- Diet Consultation ---
@@ -303,7 +339,7 @@ def run():
             'description': 'Debasmita’s diet plan heals your gut, detoxifies your cells, and restores your body\'s natural balance. Her easy-to-follow diet plans revolve around easy eating habits through only home cooked foods. Personalized guidance for Obesity, Weight Gain, Diabetes, Pregnancy, Hypertension, Thyroid, PCOD/PCOS, Pre-wedding diet, Skin & Hair. Includes recipe guidance, daily follow-ups, and workout advice.',
             'benefits': '100% Home Cooked Food, Gut Healing & Cell Detox, Daily Follow-ups, Disease & Weight Specialist, Lifestyle Guidance',
             'price': 999, 'offer_price': 799, 'weight_options': '45 Days Plan (₹799 - MRP ₹999)', 'weight': '45 Days Plan',
-            'image_url': '/static/img/doc_images/diet_plan.png', 'is_popular': True, 'order': 23
+            'image_url': '/static/img/doc_images/diet_plan.png', 'is_popular': True, 'order': 27
         }
     ]
 
@@ -371,6 +407,27 @@ def run():
             'review_text': 'The 2-in-1 Skin Glow tea and personalized consultation transformed my hair texture and reduced facial inflammation.',
             'image_url': '/static/img/testimonials/testimonial_8.jpeg',
             'rating': 5, 'order': 8
+        },
+        {
+            'client_name': 'Sushmita Banerjee',
+            'subtitle': '60 kg to 52 kg Transformation',
+            'review_text': 'Achieved my weight loss goal from 60 kg to 52 kg with Debasmita ma\'am\'s Slimming Package and personalized guidance.',
+            'image_url': '/static/img/testimonials/testimonial_9.jpeg',
+            'rating': 5, 'order': 9
+        },
+        {
+            'client_name': 'Moumita Ghosh',
+            'subtitle': '65 kg to 57 kg Transformation',
+            'review_text': 'Dropped from 65 kg to 57 kg naturally with the Slimming Package and nutrition guidance.',
+            'image_url': '/static/img/testimonials/testimonial_10.jpeg',
+            'rating': 5, 'order': 10
+        },
+        {
+            'client_name': 'Debolina Dey',
+            'subtitle': '99 kg to 93 kg in 30 Days',
+            'review_text': 'Healthy weight loss from 99 kg to 93 kg in just 30 days with better body shape and more energy.',
+            'image_url': '/static/img/testimonials/testimonial_11.jpeg',
+            'rating': 5, 'order': 11
         }
     ]
 
